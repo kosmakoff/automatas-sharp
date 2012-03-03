@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterClassNode\CharacterClassNode.cs" />
-    <Compile Include="CharacterClassNode\CharNode.cs" />
-    <Compile Include="CharacterClassNode\NegationNode.cs" />
-    <Compile Include="CharacterClassNode\RangeNode.cs" />
+    <Compile Include="CharacterClassNodes\CharacterClassNode.cs" />
+    <Compile Include="CharacterClassNodes\CharNode.cs" />
+    <Compile Include="CharacterClassNodes\NegationNode.cs" />
+    <Compile Include="CharacterClassNodes\RangeNode.cs" />
     <Compile Include="ParseTreeNodes\AlternationNode.cs" />
     <Compile Include="ParseTreeNodes\CharacterClassNode.cs" />
     <Compile Include="ParseTreeNodes\ConcatenationNode.cs" />

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AutomatasEngine.CharacterClassNode
+namespace AutomatasEngine.CharacterClassNodes
 {
 	public sealed class RangeNode : CharacterClassNode, IEnumerable<char>
 	{

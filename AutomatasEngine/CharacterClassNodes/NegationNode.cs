@@ -1,4 +1,4 @@
-﻿namespace AutomatasEngine.CharacterClassNode
+﻿namespace AutomatasEngine.CharacterClassNodes
 {
 	public sealed class NegationNode : CharacterClassNode
 	{

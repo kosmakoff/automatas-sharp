@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutomatasEngine.CharacterClassNodes;
 using CCN = AutomatasEngine.CharacterClassNode;
 
 namespace AutomatasEngine.ParseTreeNodes
@@ -12,13 +13,13 @@ namespace AutomatasEngine.ParseTreeNodes
 			Type = NodeType.CharacterClass;
 		}
 
-		public CharacterClassNode(IList<CCN.CharacterClassNode> charClassNodes)
+		public CharacterClassNode(IList<CharacterClassNodes.CharacterClassNode> charClassNodes)
 			: this()
 		{
 			if (!charClassNodes.Any())
 				throw new Exception("Empty character class");
 
-			bool isNegationMode = charClassNodes[0] is CCN.NegationNode;
+			bool isNegationMode = charClassNodes[0] is NegationNode;
 
 			var remainingNodes = charClassNodes.Skip(isNegationMode ? 1 : 0).ToArray();
 
@@ -29,10 +30,10 @@ namespace AutomatasEngine.ParseTreeNodes
 
 			foreach (var characterClassNode in remainingNodes)
 			{
-				if (characterClassNode is CCN.CharNode)
-					charNodesList.Add(((CCN.CharNode)characterClassNode).Value);
-				else if (characterClassNode is CCN.RangeNode)
-					charNodesList.AddRange((CCN.RangeNode)characterClassNode);
+				if (characterClassNode is CharacterClassNodes.CharNode)
+					charNodesList.Add(((CharacterClassNodes.CharNode)characterClassNode).Value);
+				else if (characterClassNode is RangeNode)
+					charNodesList.AddRange((RangeNode)characterClassNode);
 			}
 
 			IsNegationMode = isNegationMode;

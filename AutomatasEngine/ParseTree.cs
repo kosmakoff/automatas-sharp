@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutomatasEngine.CharacterClassNode;
+using AutomatasEngine.CharacterClassNodes;
 using CCN = AutomatasEngine.CharacterClassNode;
 using PTN = AutomatasEngine.ParseTreeNodes;
 
@@ -177,9 +178,9 @@ namespace AutomatasEngine
 			}
 		}
 
-		private static CCN.CharacterClassNode[] GetCharClassNodes(CharEnumerator enumerator)
+		private static CharacterClassNodes.CharacterClassNode[] GetCharClassNodes(CharEnumerator enumerator)
 		{
-			var nodesStack = new Stack<CCN.CharacterClassNode>();
+			var nodesStack = new Stack<CharacterClassNodes.CharacterClassNode>();
 			bool forceStop = false;
 
 			while (!forceStop && enumerator.MoveNext())
@@ -188,7 +189,7 @@ namespace AutomatasEngine
 				{
 					case '^':
 						if (!nodesStack.Any())
-							nodesStack.Push(new CCN.NegationNode());
+							nodesStack.Push(new NegationNode());
 						else
 							goto default;
 
@@ -196,11 +197,11 @@ namespace AutomatasEngine
 
 					case '-':
 						// it's just a dash that occurrs either at the very beginning or after "^"
-						if (nodesStack.Any() && (nodesStack.Count() != 1 || !(nodesStack.Peek() is CCN.NegationNode)))
+						if (nodesStack.Any() && (nodesStack.Count() != 1 || !(nodesStack.Peek() is NegationNode)))
 						{
 							// it's range dash
 
-							if (nodesStack.Peek() is CCN.RangeNode)
+							if (nodesStack.Peek() is RangeNode)
 								throw new Exception("Unexpected dash after character range");
 
 							var prevSymbol = ((CharNode)nodesStack.Pop()).Value;
@@ -209,7 +210,7 @@ namespace AutomatasEngine
 
 							var endSymbol = enumerator.Current;
 
-							nodesStack.Push(new CCN.RangeNode(prevSymbol, endSymbol));
+							nodesStack.Push(new RangeNode(prevSymbol, endSymbol));
 						}
 						else
 							goto default;
